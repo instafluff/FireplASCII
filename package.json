@@ -1,0 +1,32 @@
+{
+  "name": "fireplascii",
+  "version": "1.0.0",
+  "description": "ASCII Fireplace Display for Stream!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/instafluff/FireplASCII.git"
+  },
+  "keywords": [
+    "Instafluff",
+    "fire",
+    "fireplace",
+    "warm",
+    "display",
+    "stream",
+    "overlay",
+    "comfy"
+  ],
+  "author": "Instafluff",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/instafluff/FireplASCII/issues"
+  },
+  "homepage": "https://github.com/instafluff/FireplASCII#readme",
+  "dependencies": {
+    "webwebweb": "^1.1.8"
+  }
+}

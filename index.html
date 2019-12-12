@@ -1,0 +1,129 @@
+<html>
+  <head>
+    <title>FireplASCII</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135113520-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-135113520-1');
+    </script>
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Source Code Pro', monospace;
+        font-size: 26;
+        font-weight: 800;
+        /* background-color: black; */
+      }
+      .display {
+        white-space: pre;
+      }
+      .color-firebrick {
+        color: firebrick;
+      }
+      .color-firewood {
+        color: #654321;
+      }
+      .color-firesmoke {
+        color: #454545 ;
+      }
+      .color-firewumpy {
+        color: #e25822;
+      }
+      .color-firered {
+        color: #ff0000;
+      }
+      .color-firewarmyellow {
+        color: #FBC702;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="display" class="display"></div>
+    <script>
+      let q = ( selector ) => document.querySelector( selector );
+      var charBrick = [ "_", "[", "]", "\\", "/", "|", "=" ];
+      var charFirewood = [ "#", "{", "}", "^" ];
+      var charFire = [ ")", "(", "\"", ",", ";", ".", "'", "?" ];
+      var fire = [];
+      const screenWidth = 32;
+      function getRandomInt( num ) { return Math.floor( num * Math.random() ); }
+      function createFireplace() {
+        return `________________________________
+[==][==][==][==][==][==][==][==]
+  [==][==][==][==][==][==][==]
+  [==]|||______________|||[==]
+  [==]|||______________|||[==]
+  [==]|||______________|||[==]
+  [==]|||______________|||[==]
+  [==]|/  {###^##^###}  \\|[==]
+  [==]/  {^#^###^##^##}  \\[==]
+================================`;
+      }
+      function createFire( fireplace ) {
+        return fireplace.split( "" ).map( ( c, i ) => {
+          var x = i % 31, y = i / 31;
+          if( 3 < y && y < 8 &&
+              12 < x && x < 27 ) {
+            var xProbability = ( 1 - Math.abs( ( x - 13 ) / 13 - 0.5 ) * 2 );
+            var yProbability = ( ( y - 4 ) / 3 ) * 0.8 + 0.3;
+            if( Math.random() < xProbability * yProbability ) {
+              return charFire[ getRandomInt( charFire.length ) ];
+            }
+          }
+          return c;
+        }).join( "" );
+      }
+      function displayFireplace( fireplace ) {
+        let fireplaceDisplay = fireplace.split( "" ).map( (e,i) => {
+          let x = i % ( screenWidth + 2 );
+          let y = Math.floor( i / ( screenWidth + 2 ) );
+          if( e === "\n" ) {
+            return e;
+          }
+          if( charBrick.includes( e ) ) {
+            return `<span class='color-firebrick'>${e}</span>`;
+          }
+          if( charFirewood.includes( e ) ) {
+            return `<span class='color-firewood'>${e}</span>`;
+          }
+          if( charFire.includes( e ) ) {
+            var x1 = i % 31, y1 = i / 31;
+            var xProbability = ( 1 - Math.abs( ( x1 - 13 ) / 13 - 0.5 ) * 2 );
+            var yProbability = ( ( y1 - 4 ) / 3 ) * 0.8 + 0.3;
+            var colorSelect = xProbability * yProbability;
+            if( colorSelect < 0.3 ) {
+              return `<span class='color-firesmoke'>${e}</span>`;
+            }
+            else if( colorSelect < 0.5 ) {
+              return `<span class='color-firewumpy'>${e}</span>`;
+            }
+            else if( colorSelect < 0.8 ) {
+              return `<span class='color-firered'>${e}</span>`;
+            }
+            else {
+              return `<span class='color-firewarmyellow'>${e}</span>`;
+            }
+          }
+          return e;
+        }).join( "" );
+        q( "#display" ).innerHTML = fireplaceDisplay;
+      }
+      let chimchiminey = createFireplace();
+      chimchiminey = createFire( chimchiminey );
+      displayFireplace( chimchiminey );
+      setInterval( () => {
+        chimchiminey = createFireplace();
+        chimchiminey = createFire( chimchiminey );
+        displayFireplace( chimchiminey );
+      }, 1000 );
+      setInterval( () => {
+        chimchiminey = createFireplace();
+        chimchiminey = createFire( chimchiminey );
+        displayFireplace( chimchiminey );
+      }, 150 );
+    </script>
+  </body>
+</html>
