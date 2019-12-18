@@ -12,8 +12,6 @@ We built this Stream Overlay of an animated ASCII Fireplace live on Twitch for t
 
 > https://twitch.tv/instafluff
 
-> https://twitter.com/instafluffTV
-
 ## Instructions ##
 
 Add this as a Browser Source!
